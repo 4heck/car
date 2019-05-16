@@ -1,0 +1,371 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.6
+-- Dumped by pg_dump version 10.6
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: car; Type: TABLE; Schema: public; Owner: UserOne
+--
+
+CREATE TABLE public.car (
+    id integer NOT NULL,
+    name character varying(200) NOT NULL,
+    price integer NOT NULL,
+    year integer NOT NULL,
+    mileage integer
+);
+
+
+ALTER TABLE public.car OWNER TO "UserOne";
+
+--
+-- Name: car_id_seq; Type: SEQUENCE; Schema: public; Owner: UserOne
+--
+
+CREATE SEQUENCE public.car_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.car_id_seq OWNER TO "UserOne";
+
+--
+-- Name: car_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: UserOne
+--
+
+ALTER SEQUENCE public.car_id_seq OWNED BY public.car.id;
+
+
+--
+-- Name: customer; Type: TABLE; Schema: public; Owner: UserOne
+--
+
+CREATE TABLE public.customer (
+    id integer NOT NULL,
+    name character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.customer OWNER TO "UserOne";
+
+--
+-- Name: customer_id_seq; Type: SEQUENCE; Schema: public; Owner: UserOne
+--
+
+CREATE SEQUENCE public.customer_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.customer_id_seq OWNER TO "UserOne";
+
+--
+-- Name: customer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: UserOne
+--
+
+ALTER SEQUENCE public.customer_id_seq OWNED BY public.customer.id;
+
+
+--
+-- Name: deal; Type: TABLE; Schema: public; Owner: UserOne
+--
+
+CREATE TABLE public.deal (
+    id integer NOT NULL,
+    owner integer NOT NULL,
+    customer integer NOT NULL,
+    car integer NOT NULL
+);
+
+
+ALTER TABLE public.deal OWNER TO "UserOne";
+
+--
+-- Name: deal_id_seq; Type: SEQUENCE; Schema: public; Owner: UserOne
+--
+
+CREATE SEQUENCE public.deal_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.deal_id_seq OWNER TO "UserOne";
+
+--
+-- Name: deal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: UserOne
+--
+
+ALTER SEQUENCE public.deal_id_seq OWNED BY public.deal.id;
+
+
+--
+-- Name: owner; Type: TABLE; Schema: public; Owner: UserOne
+--
+
+CREATE TABLE public.owner (
+    id integer NOT NULL,
+    name character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.owner OWNER TO "UserOne";
+
+--
+-- Name: owner_id_seq; Type: SEQUENCE; Schema: public; Owner: UserOne
+--
+
+CREATE SEQUENCE public.owner_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.owner_id_seq OWNER TO "UserOne";
+
+--
+-- Name: owner_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: UserOne
+--
+
+ALTER SEQUENCE public.owner_id_seq OWNED BY public.owner.id;
+
+
+--
+-- Name: car id; Type: DEFAULT; Schema: public; Owner: UserOne
+--
+
+ALTER TABLE ONLY public.car ALTER COLUMN id SET DEFAULT nextval('public.car_id_seq'::regclass);
+
+
+--
+-- Name: customer id; Type: DEFAULT; Schema: public; Owner: UserOne
+--
+
+ALTER TABLE ONLY public.customer ALTER COLUMN id SET DEFAULT nextval('public.customer_id_seq'::regclass);
+
+
+--
+-- Name: deal id; Type: DEFAULT; Schema: public; Owner: UserOne
+--
+
+ALTER TABLE ONLY public.deal ALTER COLUMN id SET DEFAULT nextval('public.deal_id_seq'::regclass);
+
+
+--
+-- Name: owner id; Type: DEFAULT; Schema: public; Owner: UserOne
+--
+
+ALTER TABLE ONLY public.owner ALTER COLUMN id SET DEFAULT nextval('public.owner_id_seq'::regclass);
+
+
+--
+-- Data for Name: car; Type: TABLE DATA; Schema: public; Owner: UserOne
+--
+
+INSERT INTO public.car VALUES (1, '9К55', 564444, 2000, 119696);
+INSERT INTO public.car VALUES (2, '1949—1956 Ford', 1277504, 1994, 119437);
+INSERT INTO public.car VALUES (3, 'Автобусы АМО ЗИЛ', 640884, 2001, 56101);
+INSERT INTO public.car VALUES (4, 'Автомобиль Фрезе и Яковлева', 653309, 2018, 54012);
+INSERT INTO public.car VALUES (5, 'АЗЛК-2144 Истра', 1175413, 2017, 63940);
+INSERT INTO public.car VALUES (6, 'АМО-2', 1063950, 2005, 68495);
+INSERT INTO public.car VALUES (7, 'АМО-3', 1134671, 1988, 96076);
+INSERT INTO public.car VALUES (8, 'АМО-Ф-15', 830125, 2004, 96685);
+INSERT INTO public.car VALUES (9, 'АП 5000-50(53215)', 1010645, 2017, 47634);
+INSERT INTO public.car VALUES (10, 'АП-2(130) мод.148', 1176495, 1997, 54065);
+INSERT INTO public.car VALUES (11, 'АП-5(53213) мод. 196', 363588, 2007, 107079);
+INSERT INTO public.car VALUES (12, 'АПАЛ-2154', 360548, 2006, 43156);
+INSERT INTO public.car VALUES (13, 'Арктика (вездеход)', 354922, 1981, 97788);
+INSERT INTO public.car VALUES (14, 'АТУЛ-АЛ2', 715936, 1994, 96896);
+INSERT INTO public.car VALUES (15, 'АЦ-40 (131) мод. 137', 1056054, 1990, 93093);
+INSERT INTO public.car VALUES (16, 'БАЗ-2215', 495452, 1981, 59853);
+INSERT INTO public.car VALUES (17, 'БАЗ-5921', 980400, 2012, 81240);
+INSERT INTO public.car VALUES (18, 'БАЗ-8027', 741159, 1994, 43918);
+INSERT INTO public.car VALUES (19, 'БАЗ-8029', 508011, 1983, 40626);
+INSERT INTO public.car VALUES (20, 'БелАЗ 75600', 784351, 2017, 84491);
+
+
+--
+-- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: UserOne
+--
+
+INSERT INTO public.customer VALUES (1, 'Аббасзаде Гусейн Аббас оглы');
+INSERT INTO public.customer VALUES (2, 'Абдикадиров Каким');
+INSERT INTO public.customer VALUES (3, 'Абдрахманов Ханиф Хазигалеевич');
+INSERT INTO public.customer VALUES (4, 'Абдуллин Анвар Абдуллинович');
+INSERT INTO public.customer VALUES (5, 'Абдуллин Мансур Идиатович');
+INSERT INTO public.customer VALUES (6, 'Абдурахманов Канти');
+INSERT INTO public.customer VALUES (7, 'Абезгауз Залман Евнович');
+INSERT INTO public.customer VALUES (8, 'Абельханов Садык Фахретдинович');
+INSERT INTO public.customer VALUES (9, 'Абеулов Мукатай');
+INSERT INTO public.customer VALUES (10, 'Аблуков Александр Михайлович');
+INSERT INTO public.customer VALUES (11, 'Аборенков Василий Васильевич');
+INSERT INTO public.customer VALUES (12, 'Абраменко Дмитрий Кузьмич');
+INSERT INTO public.customer VALUES (13, 'Абрамов Михаил Егорович');
+INSERT INTO public.customer VALUES (14, 'Абрамов Пётр Александрович');
+INSERT INTO public.customer VALUES (15, 'Абрамов Фёдор Алексеевич');
+INSERT INTO public.customer VALUES (16, 'Абрамян Вараздат Карапетович');
+INSERT INTO public.customer VALUES (17, 'Абросимов Иван Александрович');
+INSERT INTO public.customer VALUES (18, 'Абросимов Михаил Романович');
+INSERT INTO public.customer VALUES (19, 'Абызов Григорий Александрович');
+INSERT INTO public.customer VALUES (20, 'Авдеев Анатолий Константинович');
+
+
+--
+-- Data for Name: deal; Type: TABLE DATA; Schema: public; Owner: UserOne
+--
+
+INSERT INTO public.deal VALUES (1, 9158, 7185, 5734);
+INSERT INTO public.deal VALUES (2, 7746, 8993, 9791);
+INSERT INTO public.deal VALUES (3, 4849, 5261, 1678);
+INSERT INTO public.deal VALUES (4, 9951, 5168, 3122);
+INSERT INTO public.deal VALUES (5, 7224, 7024, 6257);
+INSERT INTO public.deal VALUES (6, 6461, 8788, 10836);
+INSERT INTO public.deal VALUES (7, 7424, 2322, 2217);
+INSERT INTO public.deal VALUES (8, 1612, 675, 6067);
+INSERT INTO public.deal VALUES (9, 4713, 8218, 10366);
+INSERT INTO public.deal VALUES (10, 4443, 6961, 10005);
+INSERT INTO public.deal VALUES (11, 9023, 4976, 5583);
+INSERT INTO public.deal VALUES (12, 3011, 1578, 3180);
+INSERT INTO public.deal VALUES (13, 632, 6427, 9057);
+INSERT INTO public.deal VALUES (14, 2133, 5234, 2381);
+INSERT INTO public.deal VALUES (15, 4928, 1314, 10228);
+INSERT INTO public.deal VALUES (16, 10528, 7775, 7596);
+INSERT INTO public.deal VALUES (17, 9083, 4055, 10190);
+INSERT INTO public.deal VALUES (18, 11068, 5667, 10944);
+INSERT INTO public.deal VALUES (19, 5354, 10380, 7675);
+INSERT INTO public.deal VALUES (20, 3489, 3679, 3002);
+
+
+--
+-- Data for Name: owner; Type: TABLE DATA; Schema: public; Owner: UserOne
+--
+
+INSERT INTO public.owner VALUES (1, 'Стерин Ефим Ильич');
+INSERT INTO public.owner VALUES (2, 'Стогний Георгий Ефимович');
+INSERT INTO public.owner VALUES (3, 'Стоцкий Феодосий Нестерович');
+INSERT INTO public.owner VALUES (4, 'Стрельбицкий Иван Семёнович');
+INSERT INTO public.owner VALUES (5, 'Стрельцов Владимир Викторович');
+INSERT INTO public.owner VALUES (6, 'Стренаков Прокофий Аверьянович');
+INSERT INTO public.owner VALUES (7, 'Стриганов Константин Григорьевич');
+INSERT INTO public.owner VALUES (8, 'Стрижак Владимир Степанович');
+INSERT INTO public.owner VALUES (9, 'Стрижак Павел Григорьевич');
+INSERT INTO public.owner VALUES (10, 'Строганов Дмитрий Евгеньевич');
+INSERT INTO public.owner VALUES (11, 'Струков Иван Михайлович');
+INSERT INTO public.owner VALUES (12, 'Ступин Иван Спиридонович');
+INSERT INTO public.owner VALUES (13, 'Стяжкин Михаил Михайлович');
+INSERT INTO public.owner VALUES (14, 'Субботин Юрий Константинович');
+INSERT INTO public.owner VALUES (15, 'Суворов Александр Иванович)');
+INSERT INTO public.owner VALUES (16, 'Суворов Сергей Николаевич');
+INSERT INTO public.owner VALUES (17, 'Суздальский Виктор Арсеньевич');
+INSERT INTO public.owner VALUES (18, 'Суков Трофим Тихонович');
+INSERT INTO public.owner VALUES (19, 'Сулейманов Шариф Сулейманович');
+INSERT INTO public.owner VALUES (20, 'Сулейменов Муташ');
+
+
+--
+-- Name: car_id_seq; Type: SEQUENCE SET; Schema: public; Owner: UserOne
+--
+
+SELECT pg_catalog.setval('public.car_id_seq', 12450, true);
+
+
+--
+-- Name: customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: UserOne
+--
+
+SELECT pg_catalog.setval('public.customer_id_seq', 11144, true);
+
+
+--
+-- Name: deal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: UserOne
+--
+
+SELECT pg_catalog.setval('public.deal_id_seq', 11265, true);
+
+
+--
+-- Name: owner_id_seq; Type: SEQUENCE SET; Schema: public; Owner: UserOne
+--
+
+SELECT pg_catalog.setval('public.owner_id_seq', 11144, true);
+
+
+--
+-- Name: car car_pkey; Type: CONSTRAINT; Schema: public; Owner: UserOne
+--
+
+ALTER TABLE ONLY public.car
+    ADD CONSTRAINT car_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customer customer_pkey; Type: CONSTRAINT; Schema: public; Owner: UserOne
+--
+
+ALTER TABLE ONLY public.customer
+    ADD CONSTRAINT customer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: deal deal_pkey; Type: CONSTRAINT; Schema: public; Owner: UserOne
+--
+
+ALTER TABLE ONLY public.deal
+    ADD CONSTRAINT deal_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: owner owner_pkey; Type: CONSTRAINT; Schema: public; Owner: UserOne
+--
+
+ALTER TABLE ONLY public.owner
+    ADD CONSTRAINT owner_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
